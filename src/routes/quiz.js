@@ -52,7 +52,7 @@ function runRecommendationEngine(profile, topN = 5) {
     const scriptPath = path.join(__dirname, "../ml/recommend.py");
     const input = JSON.stringify({ profile, products, top_n: topN });
 
-    const python = spawn("py", [scriptPath]);
+    const python = spawn("python3", [scriptPath]);
     let output = "";
     let errorOutput = "";
 
