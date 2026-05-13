@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "name": "Airbrush High-Waist Legging",
+    "category": "leggings",
+    "gender": "womens",
+    "activities": ["yoga", "pilates"],
+    "color": "black",
+    "price": 98
+  },
+  {
+    "id": 2,
+    "name": "Alosoft Lounge Legging",
+    "category": "leggings",
+    "gender": "womens",
+    "activities": ["lounge", "yoga"],
+    "color": "ivory",
+    "price": 88
+  },
+  {
+    "id": 3,
+    "name": "Pursuit Legging",
+    "category": "leggings",
+    "gender": "womens",
+    "activities": ["run", "train"],
+    "color": "navy",
+    "price": 108
+  },
+  {
+    "id": 4,
+    "name": "Court Legging",
+    "category": "leggings",
+    "gender": "womens",
+    "activities": ["court sports", "train"],
+    "color": "white",
+    "price": 94
+  },
+  {
+    "id": 5,
+    "name": "Airlift Suit Up Bra",
+    "category": "sports_bra",
+    "gender": "womens",
+    "activities": ["yoga", "pilates"],
+    "color": "espresso",
+    "price": 68
+  },
+  {
+    "id": 6,
+    "name": "Continuity Bra Tank",
+    "category": "top",
+    "gender": "womens",
+    "activities": ["run", "train"],
+    "color": "grey",
+    "price": 62
+  },
+  {
+    "id": 7,
+    "name": "Micro Rib Embrace Tank",
+    "category": "top",
+    "gender": "womens",
+    "activities": ["lounge", "pilates"],
+    "color": "ivory",
+    "price": 54
+  },
+  {
+    "id": 8,
+    "name": "Alosoft Finesse Short",
+    "category": "shorts",
+    "gender": "womens",
+    "activities": ["court sports", "run"],
+    "color": "white",
+    "price": 58
+  },
+  {
+    "id": 9,
+    "name": "Atmosphere Full-Zip Hoodie",
+    "category": "jacket",
+    "gender": "womens",
+    "activities": ["lounge", "yoga"],
+    "color": "grey",
+    "price": 138
+  },
+  {
+    "id": 10,
+    "name": "Strength Short",
+    "category": "shorts",
+    "gender": "mens",
+    "activities": ["train", "run"],
+    "color": "black",
+    "price": 68
+  },
+  {
+    "id": 11,
+    "name": "Conquer Legging",
+    "category": "leggings",
+    "gender": "mens",
+    "activities": ["yoga", "recovery"],
+    "color": "navy",
+    "price": 98
+  },
+  {
+    "id": 12,
+    "name": "Endurance Short",
+    "category": "shorts",
+    "gender": "mens",
+    "activities": ["run", "train"],
+    "color": "grey",
+    "price": 72
+  },
+  {
+    "id": 13,
+    "name": "Serve Court Short",
+    "category": "shorts",
+    "gender": "mens",
+    "activities": ["tennis", "train"],
+    "color": "white",
+    "price": 78
+  },
+  {
+    "id": 14,
+    "name": "Chill Half-Zip Pullover",
+    "category": "jacket",
+    "gender": "mens",
+    "activities": ["recovery", "yoga"],
+    "color": "espresso",
+    "price": 118
+  },
+  {
+    "id": 15,
+    "name": "Triumph Muscle Tank",
+    "category": "top",
+    "gender": "mens",
+    "activities": ["train", "tennis"],
+    "color": "black",
+    "price": 48
+  }
+]
