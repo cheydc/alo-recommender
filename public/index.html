@@ -493,9 +493,11 @@
       <div class="product-card">
         <div class="product-rank">${String(rec.rank).padStart(2, '0')}</div>
         <div class="product-info">
-          <div class="product-name">${rec.name}</div>
-          <div class="product-meta">${rec.category.replace('_', ' ')}</div>
-          ${rec.url ? `<a href="${rec.url}" target="_blank" style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--stone);padding-bottom:1px;margin-top:6px;display:inline-block;">Shop Now</a>` : ''}
+          ${rec.url
+            ? `<a href="${rec.url}" target="_blank" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--black);text-decoration:none;border-bottom:1px solid var(--stone);padding-bottom:2px;">${rec.name}</a>`
+            : `<div class="product-name">${rec.name}</div>`
+          }
+          <div class="product-meta" style="margin-top:6px;">${rec.category.replace('_', ' ')}</div>
         </div>
         <div class="product-score">
           <div class="product-price">$${rec.price}</div>
