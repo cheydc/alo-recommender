@@ -95,6 +95,7 @@ def recommend(profile, products, top_n=5):
             "category": product["category"],
             "color": product["color"],
             "price": product["price"],
+            "url": product.get("url", ""),
             "score": round(float(score), 4)
         })
 

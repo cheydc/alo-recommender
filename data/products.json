@@ -6,7 +6,8 @@
     "gender": "womens",
     "activities": ["yoga", "pilates"],
     "color": "black",
-    "price": 98
+    "price": 118,
+    "url": "https://www.aloyoga.com/products/w5473r-high-waist-airbrush-legging-black"
   },
   {
     "id": 2,
@@ -14,26 +15,29 @@
     "category": "leggings",
     "gender": "womens",
     "activities": ["lounge", "yoga"],
-    "color": "ivory",
-    "price": 88
+    "color": "grey",
+    "price": 114,
+    "url": "https://www.aloyoga.com/products/w5762r-high-waist-alosoft-lounge-legging-athletic-heather-grey?"
   },
   {
     "id": 3,
-    "name": "Pursuit Legging",
+    "name": "High-Waist Airlift Legging",
     "category": "leggings",
     "gender": "womens",
     "activities": ["run", "train"],
     "color": "navy",
-    "price": 108
+    "price": 134,
+    "url": "https://www.aloyoga.com/products/w5561r-high-waist-airlift-legging-navy"
   },
   {
     "id": 4,
-    "name": "Court Legging",
-    "category": "leggings",
+    "name": "Match Point Tennis Skirt",
+    "category": "shorts",
     "gender": "womens",
     "activities": ["court sports", "train"],
     "color": "white",
-    "price": 94
+    "price": 78,
+    "url": "https://www.aloyoga.com/products/w6240r-match-point-tennis-skirt-white?variant=39398310707380&disableCurrencyEstimate="
   },
   {
     "id": 5,
@@ -42,96 +46,107 @@
     "gender": "womens",
     "activities": ["yoga", "pilates"],
     "color": "espresso",
-    "price": 68
+    "price": 88,
+    "url": "https://www.aloyoga.com/products/w9780r-airlift-suit-up-bra-espresso?"
   },
   {
     "id": 6,
-    "name": "Continuity Bra Tank",
+    "name": "Alosoft 1/2 Zip Rapid Pullover",
     "category": "top",
     "gender": "womens",
     "activities": ["run", "train"],
     "color": "grey",
-    "price": 62
+    "price": 108,
+    "url": "https://www.aloyoga.com/products/w3694r-alosoft-1-2-zip-rapid-pullover-anthracite"
   },
   {
     "id": 7,
-    "name": "Micro Rib Embrace Tank",
+    "name": "Sway Bra Tank",
     "category": "top",
     "gender": "womens",
     "activities": ["lounge", "pilates"],
     "color": "ivory",
-    "price": 54
+    "price": 88,
+    "url": "https://www.aloyoga.com/products/w9815r-sway-bra-tank-oatmeal-heather"
   },
   {
     "id": 8,
-    "name": "Alosoft Finesse Short",
+    "name": "Mid-Rise Go Time Short",
     "category": "shorts",
     "gender": "womens",
     "activities": ["court sports", "run"],
     "color": "white",
-    "price": 58
+    "price": 78,
+    "url": "https://www.aloyoga.com/products/w6620r-mid-rise-go-time-short-white"
   },
   {
     "id": 9,
-    "name": "Atmosphere Full-Zip Hoodie",
+    "name": "Alosoft Sincere Fitted Jacket",
     "category": "jacket",
     "gender": "womens",
     "activities": ["lounge", "yoga"],
     "color": "grey",
-    "price": 138
+    "price": 128,
+    "url": "https://www.aloyoga.com/products/w4736r-alosoft-sincere-fitted-jacket-athletic-heather-grey"
   },
   {
     "id": 10,
-    "name": "Strength Short",
+    "name": "7-inch Conquer React Performance Short",
     "category": "shorts",
     "gender": "mens",
     "activities": ["train", "run"],
     "color": "black",
-    "price": 68
+    "price": 68,
+    "url": "https://www.aloyoga.com/products/m6131r-conquer-react-performance-short-black"
   },
   {
     "id": 11,
-    "name": "Conquer Legging",
+    "name": "Co-Op Pant (Long)",
     "category": "leggings",
     "gender": "mens",
     "activities": ["yoga", "recovery"],
     "color": "navy",
-    "price": 98
+    "price": 138,
+    "url": "https://www.aloyoga.com/products/m5190r-co-op-pant-long-navy?variant=50661330878823&disableCurrencyEstimate="
   },
   {
     "id": 12,
-    "name": "Endurance Short",
+    "name": "5-inch Traction Running Short",
     "category": "shorts",
     "gender": "mens",
     "activities": ["run", "train"],
     "color": "grey",
-    "price": 72
+    "price": 88,
+    "url": "https://www.aloyoga.com/products/m6169r-5-traction-running-short-lunar-grey?"
   },
   {
     "id": 13,
-    "name": "Serve Court Short",
+    "name": "7-inch Repetition Short",
     "category": "shorts",
     "gender": "mens",
     "activities": ["tennis", "train"],
-    "color": "white",
-    "price": 78
+    "color": "black",
+    "price": 78,
+    "url": "https://www.aloyoga.com/products/m6154r-7-repetition-short-black?"
   },
   {
     "id": 14,
-    "name": "Chill Half-Zip Pullover",
+    "name": "Accolade Hoodie",
     "category": "jacket",
     "gender": "mens",
     "activities": ["recovery", "yoga"],
     "color": "espresso",
-    "price": 118
+    "price": 148,
+    "url": "https://www.aloyoga.com/products/u3032rg-accolade-hoodie-espresso-mens"
   },
   {
     "id": 15,
-    "name": "Triumph Muscle Tank",
+    "name": "Conquer Muscle Tank",
     "category": "top",
     "gender": "mens",
     "activities": ["train", "tennis"],
     "color": "black",
-    "price": 48
+    "price": 68,
+    "url": "https://www.aloyoga.com/products/m2066r-conquer-muscle-tank-black"
   }
 ]
