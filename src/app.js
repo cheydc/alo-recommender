@@ -7,9 +7,11 @@ app.use(express.json());
 // Routes
 const { router: productsRouter } = require("./routes/products");
 const quizRouter = require("./routes/quiz");
+const recommendationsRouter = require("./routes/recommendations");
 
 app.use("/products", productsRouter);
 app.use("/quiz", quizRouter);
+app.use("/recommendations", recommendationsRouter);
 
 // Health check
 app.get("/", (req, res) => {
