@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALO — Find Your Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafaf8;
+      --cream: #f2ede6;
+      --stone: #c8bfb0;
+      --charcoal: #3a3a3a;
+      --accent: #8b7355;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 32px 48px;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid var(--stone);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      padding: 64px 24px;
+    }
+
+    /* STEPS */
+    .step { display: none; animation: fadeUp 0.5s ease forwards; }
+    .step.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 48px;
+      color: var(--black);
+    }
+
+    /* OPTIONS */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .options-grid.single { grid-template-columns: 1fr; }
+    .options-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+    .option {
+      border: 1px solid var(--stone);
+      padding: 20px 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-align: center;
+      background: transparent;
+      color: var(--charcoal);
+      text-transform: uppercase;
+    }
+
+    .option:hover { border-color: var(--black); color: var(--black); }
+    .option.selected { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* COLOR SWATCHES */
+    .color-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .color-swatch {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .color-swatch:hover { transform: scale(1.1); }
+    .color-swatch.selected { border-color: var(--black); transform: scale(1.1); }
+    .color-swatch.selected::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid var(--black);
+    }
+
+    .color-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 8px;
+      color: var(--charcoal);
+    }
+
+    .color-item { display: flex; flex-direction: column; align-items: center; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-block;
+      padding: 16px 48px;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 400;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary { background: var(--black); color: var(--white); }
+    .btn-primary:hover { background: var(--charcoal); }
+    .btn-primary:disabled { background: var(--stone); cursor: not-allowed; }
+
+    /* PROGRESS */
+    .progress {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 64px;
+    }
+
+    .progress-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--stone);
+      transition: background 0.3s ease;
+    }
+
+    .progress-dot.active { background: var(--black); }
+
+    /* RESULTS */
+    #results { display: none; }
+
+    .results-header {
+      margin-bottom: 48px;
+    }
+
+    .results-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      margin-bottom: 8px;
+    }
+
+    .results-subtitle {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    .product-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--cream);
+      animation: fadeUp 0.4s ease forwards;
+    }
+
+    .product-rank {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--stone);
+      width: 48px;
+      flex-shrink: 0;
+    }
+
+    .product-info { flex: 1; padding: 0 24px; }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .product-meta {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .product-score {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--stone);
+      text-align: right;
+    }
+
+    .product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    .score-bar {
+      width: 80px;
+      height: 2px;
+      background: var(--cream);
+      margin-top: 6px;
+      margin-left: auto;
+    }
+
+    .score-fill {
+      height: 100%;
+      background: var(--black);
+      transition: width 0.8s ease;
+    }
+
+    .restart-btn {
+      margin-top: 48px;
+      background: transparent;
+      border: 1px solid var(--stone);
+      color: var(--charcoal);
+      padding: 14px 40px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .restart-btn:hover { border-color: var(--black); color: var(--black); }
+
+    .loading {
+      text-align: center;
+      padding: 64px 0;
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ALO</div>
+</header>
+
+<div class="container">
+
+  <!-- PROGRESS DOTS -->
+  <div class="progress" id="progress">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+
+  <!-- STEP 1: GENDER -->
+  <div class="step active" id="step-1">
+    <div class="step-label">Step 1 of 4</div>
+    <h1 class="step-title">Who are you<br>shopping for?</h1>
+    <div class="options-grid">
+      <div class="option" data-value="womens" onclick="selectOption(this, 'gender')">Women</div>
+      <div class="option" data-value="mens" onclick="selectOption(this, 'gender')">Men</div>
+    </div>
+    <button class="btn btn-primary" id="btn-1" disabled onclick="nextStep(2)">Continue</button>
+  </div>
+
+  <!-- STEP 2: ACTIVITIES -->
+  <div class="step" id="step-2">
+    <div class="step-label">Step 2 of 4</div>
+    <h1 class="step-title">What moves<br>you?</h1>
+    <div class="options-grid" id="activities-grid"></div>
+    <button class="btn btn-primary" id="btn-2" disabled onclick="nextStep(3)">Continue</button>
+  </div>
+
+  <!-- STEP 3: SIZE -->
+  <div class="step" id="step-3">
+    <div class="step-label">Step 3 of 4</div>
+    <h1 class="step-title">What's<br>your size?</h1>
+    <div class="options-grid three" id="size-grid"></div>
+    <button class="btn btn-primary" id="btn-3" disabled onclick="nextStep(4)">Continue</button>
+  </div>
+
+  <!-- STEP 4: COLOR -->
+  <div class="step" id="step-4">
+    <div class="step-label">Step 4 of 4</div>
+    <h1 class="step-title">Choose<br>your palette.</h1>
+    <div class="color-grid" id="color-grid"></div>
+    <button class="btn btn-primary" id="btn-4" disabled onclick="submitQuiz()">Find My Collection</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="results-header">
+      <h2 class="results-title">Your Collection</h2>
+      <p class="results-subtitle">Curated for you</p>
+    </div>
+    <div id="products-list"></div>
+    <button class="restart-btn" onclick="restart()">Start Over</button>
+  </div>
+
+</div>
+
+<script>
+  const WOMENS_ACTIVITIES = ["yoga", "pilates", "court sports", "train", "run", "lounge"];
+  const MENS_ACTIVITIES   = ["train", "run", "yoga", "tennis", "recovery"];
+  const WOMENS_SIZES      = ["XXS", "XS", "S", "M", "L"];
+  const MENS_SIZES        = ["S", "M", "L", "XL", "2XL"];
+
+  const COLORS = {
+    womens: [
+      { value: "black",   hex: "#1a1a1a" },
+      { value: "white",   hex: "#f5f5f0" },
+      { value: "espresso",hex: "#4a3728" },
+      { value: "grey",    hex: "#9a9a9a" },
+      { value: "navy",    hex: "#1e2d4a" },
+      { value: "ivory",   hex: "#f0ead8" }
+    ],
+    mens: [
+      { value: "black",   hex: "#1a1a1a" },
+      { value: "espresso",hex: "#4a3728" },
+      { value: "grey",    hex: "#9a9a9a" },
+      { value: "navy",    hex: "#1e2d4a" }
+    ]
+  };
+
+  const answers = { gender: null, activities: [], size: null, colors: [] };
+  let currentStep = 1;
+
+  function selectOption(el, field) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    answers[field] = el.dataset.value;
+
+    if (field === 'gender') {
+      document.getElementById('btn-1').disabled = false;
+      buildActivitiesGrid();
+      buildSizeGrid();
+      buildColorGrid();
+    }
+
+    if (field === 'size') document.getElementById('btn-3').disabled = false;
+  }
+
+  function selectActivity(el) {
+    el.classList.toggle('selected');
+    const val = el.dataset.value;
+    if (el.classList.contains('selected')) {
+      answers.activities.push(val);
+    } else {
+      answers.activities = answers.activities.filter(a => a !== val);
+    }
+    document.getElementById('btn-2').disabled = answers.activities.length === 0;
+  }
+
+  function selectColor(el, value) {
+    el.classList.toggle('selected');
+    if (el.classList.contains('selected')) {
+      answers.colors.push(value);
+    } else {
+      answers.colors = answers.colors.filter(c => c !== value);
+    }
+    document.getElementById('btn-4').disabled = answers.colors.length === 0;
+  }
+
+  function buildActivitiesGrid() {
+    const grid = document.getElementById('activities-grid');
+    const list = answers.gender === 'womens' ? WOMENS_ACTIVITIES : MENS_ACTIVITIES;
+    grid.innerHTML = list.map(a => `
+      <div class="option" data-value="${a}" onclick="selectActivity(this)">
+        ${a.charAt(0).toUpperCase() + a.slice(1)}
+      </div>
+    `).join('');
+    answers.activities = [];
+    document.getElementById('btn-2').disabled = true;
+  }
+
+  function buildSizeGrid() {
+    const grid = document.getElementById('size-grid');
+    const list = answers.gender === 'womens' ? WOMENS_SIZES : MENS_SIZES;
+    grid.innerHTML = list.map(s => `
+      <div class="option" data-value="${s}" onclick="selectOption(this, 'size')">${s}</div>
+    `).join('');
+    answers.size = null;
+    document.getElementById('btn-3').disabled = true;
+  }
+
+  function buildColorGrid() {
+    const grid = document.getElementById('color-grid');
+    const list = COLORS[answers.gender];
+    grid.innerHTML = list.map(c => `
+      <div class="color-item">
+        <div class="color-swatch" style="background:${c.hex}" onclick="selectColor(this, '${c.value}')"></div>
+        <div class="color-label">${c.value}</div>
+      </div>
+    `).join('');
+    answers.colors = [];
+    document.getElementById('btn-4').disabled = true;
+  }
+
+  function nextStep(step) {
+    document.getElementById(`step-${currentStep}`).classList.remove('active');
+    currentStep = step;
+    document.getElementById(`step-${currentStep}`).classList.add('active');
+
+    const dots = document.querySelectorAll('.progress-dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i < step));
+  }
+
+  async function submitQuiz() {
+    document.getElementById(`step-4`).classList.remove('active');
+    document.getElementById('progress').style.display = 'none';
+
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'loading';
+    loadingDiv.textContent = 'Curating your collection...';
+    document.querySelector('.container').appendChild(loadingDiv);
+
+    try {
+      const res = await fetch('http://localhost:3000/quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gender: answers.gender,
+          activities: answers.activities,
+          size: answers.size,
+          colors: answers.colors
+        })
+      });
+
+      const data = await res.json();
+      loadingDiv.remove();
+      showResults(data.recommendations);
+    } catch (err) {
+      loadingDiv.textContent = 'Something went wrong. Please try again.';
+    }
+  }
+
+  function showResults(recommendations) {
+    const resultsEl = document.getElementById('results');
+    const listEl = document.getElementById('products-list');
+
+    listEl.innerHTML = recommendations.map(rec => `
+      <div class="product-card">
+        <div class="product-rank">${String(rec.rank).padStart(2, '0')}</div>
+        <div class="product-info">
+          <div class="product-name">${rec.name}</div>
+          <div class="product-meta">${rec.category.replace('_', ' ')}</div>
+        </div>
+        <div class="product-score">
+          <div class="product-price">$${rec.price}</div>
+          <div class="score-bar">
+            <div class="score-fill" style="width: ${Math.round(rec.score * 100)}%"></div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    resultsEl.style.display = 'block';
+  }
+
+  function restart() {
+    answers.gender = null;
+    answers.activities = [];
+    answers.size = null;
+    answers.color = null;
+    currentStep = 1;
+
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('progress').style.display = 'flex';
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-1').classList.add('active');
+    document.querySelectorAll('.progress-dot').forEach((d, i) => d.classList.toggle('active', i === 0));
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.getElementById('btn-1').disabled = true;
+  }
+</script>
+
+</body>
+</html>

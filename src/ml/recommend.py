@@ -46,9 +46,9 @@ def build_user_vector(profile, activities, colors):
     for activity in activities:
         vec.append(1.0 if activity in profile["activities"] else 0.0)
 
-    # One-hot encode color
+    # Multi-hot encode colors (user can select multiple)
     for color in colors:
-        vec.append(1.0 if color == profile["color"] else 0.0)
+        vec.append(1.0 if color in profile["colors"] else 0.0)
 
     return np.array(vec)
 
@@ -65,7 +65,7 @@ def build_product_vector(product, activities, colors):
     for activity in activities:
         vec.append(1.0 if activity in product["activities"] else 0.0)
 
-    # One-hot encode color
+    # Multi-hot encode color (product has one color, treat as list for consistency)
     for color in colors:
         vec.append(1.0 if color == product["color"] else 0.0)
 

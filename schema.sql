@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS quiz_responses (
     gender VARCHAR(10) NOT NULL,
     activities JSON NOT NULL,
     size VARCHAR(5) NOT NULL,
-    color VARCHAR(20) NOT NULL,
+    color JSON NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );

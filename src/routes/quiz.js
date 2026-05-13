@@ -34,8 +34,10 @@ function validateQuiz(body) {
   if (!validSizes.includes(body.size))
     errors.push(`size must be valid for selected gender`);
 
-  if (!validColors.includes(body.color))
-    errors.push(`color must be valid for selected gender`);
+  if (!Array.isArray(body.colors) || body.colors.length === 0)
+    errors.push('colors must be a non-empty array');
+  else if (!body.colors.every((c) => validColors.includes(c)))
+    errors.push('colors must be valid for selected gender');
 
   return errors;
 }
@@ -82,7 +84,7 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ success: false, errors });
   }
 
-  const { activities, gender, size, color } = req.body;
+  const { activities, gender, size, colors } = req.body;
 
   try {
     // 1. Create a new user record
@@ -93,11 +95,11 @@ router.post("/", async (req, res) => {
     await db.execute(
       `INSERT INTO quiz_responses (user_id, gender, activities, size, color)
        VALUES (?, ?, ?, ?, ?)`,
-      [userId, gender, JSON.stringify(activities), size, color]
+      [userId, gender, JSON.stringify(activities), size, JSON.stringify(colors)]
     );
 
     // 3. Run the recommendation engine
-    const profile = { activities, gender, size, color };
+    const profile = { activities, gender, size, colors };
     const recommendations = await runRecommendationEngine(profile);
 
     // 4. Save recommendations to the database
