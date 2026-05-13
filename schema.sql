@@ -1,9 +1,28 @@
-CREATE TABLE users (
+CREATE DATABASE IF NOT EXISTS alo_cold_start;
+USE alo_cold_start;
+
+CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE quiz_responses (
+CREATE TABLE IF NOT EXISTS quiz_responses (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    FOREIGN KEY (column_name) REFERENCES other_table(column_in_that_table)
+    user_id INT NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    activities JSON NOT NULL,
+    size VARCHAR(5) NOT NULL,
+    color VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS recommendations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    score FLOAT NOT NULL,
+    `rank` INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
